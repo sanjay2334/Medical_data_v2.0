@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { AppBar,Toolbar,IconButton ,Typography,CssBaseline} from '@mui/material';
 import './App.css';
+import Dappbar from './Dappbar';
+import { Paper } from '@mui/material';
+import { useState } from 'react';
 
-function App() {
+function App() {  
+const [dark,setDark] = useState(true)
+const theme = createTheme({
+  palette:{
+    mode:dark?"dark":'light'
+  }
+})
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Paper>
+          <div>
+            <Dappbar check={dark} change={()=>{setDark(!dark)}}/>
+          </div>
+        </Paper>
+      </ThemeProvider>
   );
 }
 
